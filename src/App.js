@@ -58,16 +58,18 @@ useEffect(() => {
   };
 
   return (
-    <div>
+    <div className="todo-container">
       <h1>Todo App</h1>
 
-      <input
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-        placeholder="Enter a task"
-      />
+      <div className="todo-input">
+  <input
+    value={input}
+    onChange={(e) => setInput(e.target.value)}
+    placeholder="Enter a task"
+  />
 
-      <button onClick={addTodo}>Add</button>
+  <button onClick={addTodo}>Add</button>
+</div>
 
       <ul>
         {todos.map((todo) => (
@@ -78,19 +80,23 @@ useEffect(() => {
               onChange={() => toggleTodo(todo.id)}
             />
 
-            <span
-              style={{
-                textDecoration: todo.completed
-                  ? "line-through"
-                  : "none"
-              }}
-            >
-              {todo.text}
-            </span>
+           <span
+  className="todo-text"
+  style={{
+    textDecoration: todo.completed
+      ? "line-through"
+      : "none"
+  }}
+>
+  {todo.text}
+</span>
 
-            <button onClick={() => deleteTodo(todo.id)}>
-              Delete
-            </button>
+           <button
+  className="delete-button"
+  onClick={() => deleteTodo(todo.id)}
+>
+  Delete
+</button>
           </li>
         ))}
       </ul>
