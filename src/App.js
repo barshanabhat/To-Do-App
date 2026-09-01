@@ -1,9 +1,29 @@
 import "./App.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 function App() {
-  const [todos, setTodos] = useState([]);
-  const [input, setInput] = useState("");
+ const [todos, setTodos] = useState([]);
+const [input, setInput] = useState("");
+const [loaded, setLoaded] = useState(false);
+  
+
+  // Load todos when the app starts
+useEffect(() => {
+  const saved = localStorage.getItem("todos");
+
+  if (saved) {
+    setTodos(JSON.parse(saved));
+  }
+
+  setLoaded(true);
+}, []);
+
+  // Save todos whenever they change
+ useEffect(() => {
+  if (loaded) {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }
+}, [todos, loaded]);
 
   // Add a new todo
   const addTodo = () => {
